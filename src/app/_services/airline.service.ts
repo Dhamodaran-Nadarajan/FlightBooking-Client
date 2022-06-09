@@ -12,4 +12,12 @@ export class AirlineService {
   getAllAirLines() {
     return this.http.get(this.baseUrl);
   }
+
+  deleteAirline(airlineId: number) {
+    return this.http.delete(this.baseUrl + `/${airlineId}`);
+  }
+
+  blockAirline(airlineId: number) {
+    return this.http.put(this.baseUrl + `/${airlineId}`, '');
+  }
 }

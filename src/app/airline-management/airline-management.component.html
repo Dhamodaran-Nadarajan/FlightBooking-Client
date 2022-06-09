@@ -1,13 +1,73 @@
 <div class="container">
-  <h3>Airline-management</h3>
-  <button class="btn btn-dark" (click)="getAllAirlines()">Get Airlines</button>
-  <div class="container container-md justify-content-center">
-    <ul>
-      <li *ngFor="let airline of allAirlines">
-        {{ airline.airlineid }} - {{ airline.airlineName }} -
-        {{ airline.contactAddress }} - {{ airline.contactNumber }} -
-        {{ airline.isActive }}
-      </li>
-    </ul>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title text-center text-dark">Airline-management</h3>
+    </div>
+    <div class="card-body">
+      <div class="container bg-light mb-3">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-secondary m-sm-1" (click)="getAirlines()">
+            Get All Airlines
+          </button>
+          <button class="btn btn-secondary m-sm-1" (click)="getAirlines()">
+            Add Airline
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="container container-md justify-content-center"
+        *ngIf="showAirlines"
+      >
+        <table class="table table-bordered">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th>Airline ID</th>
+              <th>Airline Name</th>
+              <th>Airline Address</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr *ngFor="let airline of allAirlines">
+              <td>{{ airline.airlineId }}</td>
+              <td>{{ airline.airlineName }}</td>
+              <td>{{ airline.contactAddress }}</td>
+              <td>{{ airline.isActive }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row g-3">
+          <div class="col-auto">
+            <input
+              #blockAirline
+              type="number"
+              id="blockAirlineId"
+              placeholder="Airline Id.."
+              class="form-control"
+            />
+          </div>
+          <div class="col-auto">
+            <button
+              class="btn btn-secondary"
+              (click)="blockAirlineWithId(blockAirline.value)"
+            >
+              Block / Unblock Airline
+            </button>
+          </div>
+          <div class="col-auto">
+            <button
+              class="btn btn-secondary"
+              (click)="deleteAirlineWithId(blockAirline.value)"
+            >
+              Delete Airline
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container bg-light text-center" *ngIf="showMessage">
+      <p>{{ message }}</p>
+    </div>
   </div>
 </div>

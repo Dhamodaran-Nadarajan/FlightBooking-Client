@@ -1,0 +1,97 @@
+<div class="justify-content-center">
+  <div class="card-body m-auto" style="width: 600px">
+    <form
+      class="form-register mt-lg-4"
+      #registerform="ngForm"
+      (ngSubmit)="Register()"
+    >
+      <h1 class="h3 mb-3 font-weight-normal">Sign Up !!</h1>
+      <div class="d-lg-inline">
+        <label for="inputUsername" class="sr-only">User Name</label>
+        <input
+          type="text"
+          name="username"
+          id="inputUsername"
+          class="form-control"
+          placeholder="Username.."
+          required
+          minlength="4"
+          [(ngModel)]="model.username"
+        />
+        <!-- <div *ngIf="inputUsername.invalid && (inputUsername.dirty || name.touched)" class="alert">
+          <div *ngIf="name.errors?.['required']">Name is required.</div>
+          <div *ngIf="name.errors?.['minlength']">
+            Name must be at least 4 characters long.
+          </div>
+          <div *ngIf="name.errors?.['forbiddenName']">Name cannot be Bob.</div>
+        </div> -->
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input
+          type="email"
+          name="email"
+          id="inputEmail"
+          class="form-control"
+          placeholder="Email address.."
+          required=""
+          autofocus=""
+          [(ngModel)]="model.email"
+        />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Password.."
+          required=""
+          [(ngModel)]="model.password"
+        />
+        <label for="contactNumber" class="sr-only">Contact Number</label>
+        <input
+          type="number"
+          name="contact"
+          id="contactNumber"
+          class="form-control"
+          placeholder="+91.."
+          required=""
+          [(ngModel)]="model.contactNumber"
+        />
+        <div class="form-inline">
+          <label for="userGender">Gender:</label>
+          <div>
+            <input
+              id="male"
+              type="radio"
+              value="M"
+              name="userGender"
+              [(ngModel)]="model.gender"
+            />
+            <label for="male">Male</label>
+          </div>
+
+          <div>
+            <input
+              id="female"
+              type="radio"
+              value="F"
+              name="userGender"
+              [(ngModel)]="model.gender"
+            />
+            <label for="female">Female</label>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-success btn-block mt-1" type="submit">
+          Register
+        </button>
+        <div class="alert-success mt-3" *ngIf="registrationSuccess">
+          <p><strong>Registration success.</strong> {{ successMessage }}</p>
+        </div>
+        <div class="alert-danger mt-3" *ngIf="registrationError">
+          <p><strong>Registration Error.</strong> {{ errorMessage }}</p>
+        </div>
+      </div>
+
+      <!-- <p class="mt-5 mb-3 text-muted">© 2017-2018</p> -->
+    </form>
+  </div>
+</div>

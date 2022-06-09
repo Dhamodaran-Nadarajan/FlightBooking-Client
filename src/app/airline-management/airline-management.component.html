@@ -1,0 +1,13 @@
+<div class="container">
+  <h3>Airline-management</h3>
+  <button class="btn btn-dark" (click)="getAllAirlines()">Get Airlines</button>
+  <div class="container container-md justify-content-center">
+    <ul>
+      <li *ngFor="let airline of allAirlines">
+        {{ airline.airlineid }} - {{ airline.airlineName }} -
+        {{ airline.contactAddress }} - {{ airline.contactNumber }} -
+        {{ airline.isActive }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container mt-4" style="width: 600px">
+  <div class="card">
+    <h3 class="font-weight-bold mb-3 card-header bg-dark text-white">
+      Sign In
+    </h3>
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="inputUsername" class="sr-only"
+              ><strong>User Name</strong></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="username"
+              value=""
+            />
+          </div>
+          <div
+            *ngIf="
+              loginForm.controls['username'].invalid &&
+              (loginForm.controls['username'].dirty ||
+                loginForm.controls['username'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="loginForm.controls['username'].errors">
+              Name is required.
+            </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="inputPassword" class="sr-only"
+              ><strong>Password</strong></label
+            >
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              value=""
+            />
+          </div>
+          <div
+            *ngIf="
+              loginForm.controls['password'].invalid &&
+              (loginForm.controls['password'].dirty ||
+                loginForm.controls['password'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="loginForm.controls['password'].hasError('required')">
+              Password is required
+            </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <p *ngIf="invalidLogin" class="alert alert-danger text-center">
+              <strong>{{ messageContent }}</strong>
+            </p>
+          </div>
+          <div class="form-group text-center">
+            <input type="submit" class="btn btn-success" value="Submit" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

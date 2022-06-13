@@ -26,9 +26,26 @@
         </li>
       </ul>
     </div>
-    <button routerLink="/register" class="btn btn-outline-success m-sm-1">
-      Sign Up
+    <button
+      routerLink="/login"
+      class="btn btn-outline-success m-sm-1"
+      *ngIf="!isUserLoggedIn"
+    >
+      <strong>Sign In</strong>
     </button>
-    <button class="btn btn-outline-success m-sm-1">Login</button>
+    <button
+      routerLink="/signup"
+      class="btn btn-outline-success m-sm-1"
+      *ngIf="!isUserLoggedIn"
+    >
+      <strong>Sign Up</strong>
+    </button>
+    <button
+      class="btn btn-outline-danger m-sm-1"
+      *ngIf="isUserLoggedIn"
+      (click)="logout()"
+    >
+      <strong>Sign Out</strong>
+    </button>
   </div>
 </nav>

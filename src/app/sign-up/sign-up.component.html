@@ -1,0 +1,144 @@
+<div class="container mt-4" style="width: 600px">
+  <div class="card">
+    <h3 class="font-weight-bold mb-3 card-header bg-dark text-white">
+      Sign Up
+    </h3>
+    <div class="card-body">
+      <form [formGroup]="signUpForm" (ngSubmit)="onClickRegister()">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="inputUsername" class="sr-only"
+              ><strong>User Name</strong></label
+            >
+            <input
+              name="inputUsername"
+              type="text"
+              class="form-control"
+              formControlName="username"
+              value=""
+            />
+          </div>
+          <div
+            *ngIf="
+              signUpForm.controls['username'].invalid &&
+              (signUpForm.controls['username'].dirty ||
+                signUpForm.controls['username'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="signUpForm.controls['username'].errors">
+              Username is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUserEmail" class="sr-only"
+              ><strong>Email</strong></label
+            >
+            <input
+              type="email"
+              name="inputUserEmail"
+              class="form-control"
+              formControlName="email"
+              value=""
+            />
+          </div>
+          <div
+            *ngIf="
+              signUpForm.controls['email'].invalid &&
+              (signUpForm.controls['email'].dirty ||
+                signUpForm.controls['email'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="signUpForm.controls['email'].errors">
+              Email is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="sr-only"
+              ><strong>Password</strong></label
+            >
+            <input
+              type="password"
+              name="inputPassword"
+              class="form-control"
+              formControlName="password"
+              value=""
+            />
+          </div>
+          <div
+            *ngIf="
+              signUpForm.controls['password'].invalid &&
+              (signUpForm.controls['password'].dirty ||
+                signUpForm.controls['password'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="signUpForm.controls['password'].errors">
+              Password is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputContactNumber" class="sr-only"
+              ><strong>Contact Number</strong></label
+            >
+            <input
+              type="number"
+              name="inputContactNumber"
+              class="form-control"
+              formControlName="contactNumber"
+              value=""
+            />
+          </div>
+          <!-- <div
+            *ngIf="
+              signUpForm.controls['contactNumber'].invalid &&
+              (signUpForm.controls['contactNumber'].dirty ||
+                signUpForm.controls['contactNumber'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="signUpForm.controls['contactNumber'].errors?.maxlength">
+              Contact Number should be 10 digit.
+            </div>
+          </div> -->
+          <div class="form-group mt-2">
+            <label for="gender"><strong>Gender:</strong></label>
+            <input
+              type="radio"
+              value="M"
+              name="gender"
+              formControlName="gender"
+              class="m-lg-1"
+            />
+            <label for="male">Male</label>
+            <input
+              type="radio"
+              value="F"
+              name="gender"
+              formControlName="gender"
+              class="m-lg-1"
+            />
+            <label for="female">Female</label>
+          </div>
+          <div class="form-group mt-2">
+            <p *ngIf="registrationError" class="alert alert-danger text-center">
+              <strong>{{ message }}</strong>
+            </p>
+          </div>
+          <div class="form-group mt-2">
+            <p
+              *ngIf="registrationSuccess"
+              class="alert alert-success text-center"
+            >
+              <strong>{{ message }}</strong>
+            </p>
+          </div>
+          <div class="form-group text-center">
+            <input type="submit" class="btn btn-success" value="Register" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

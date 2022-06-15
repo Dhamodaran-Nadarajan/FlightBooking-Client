@@ -1,1 +1,95 @@
-<h3>Home Component</h3>
+<div class="container mt-3" style="width: 1200px">
+  <div class="card">
+    <h3 class="card-header text-center bg-dark text-white">Search Airlines</h3>
+    <div class="card-body">
+      <form
+        class="form-inline"
+        [formGroup]="searchAirlineForm"
+        (ngSubmit)="searchAirlines()"
+      >
+        <div class="form-group text-center mb-2">
+          <input
+            type="text"
+            formControlName="from"
+            class="form-control-sm m-sm-1"
+            placeholder="From..."
+          />
+          <input
+            type="text"
+            formControlName="to"
+            class="form-control-sm m-sm-1"
+            placeholder="To..."
+          />
+          <button type="submit" class="btn-sm btn-success m-sm-1">
+            Search
+          </button>
+          <div
+            *ngIf="
+              searchAirlineForm.controls['from'].invalid &&
+              (searchAirlineForm.controls['from'].dirty ||
+                searchAirlineForm.controls['from'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="searchAirlineForm.controls['from'].errors">
+              *From is required
+            </div>
+          </div>
+          <div
+            *ngIf="
+              searchAirlineForm.controls['to'].invalid &&
+              (searchAirlineForm.controls['to'].dirty ||
+                searchAirlineForm.controls['to'].touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="searchAirlineForm.controls['to'].errors">
+              *To is required
+            </div>
+          </div>
+        </div>
+        <p
+          class="alert alert-danger text-center m-lg-auto mt-3"
+          *ngIf="message"
+          style="width: 600px"
+        >
+          {{ message }}
+        </p>
+      </form>
+
+      <table class="table table-bordered mt-4" *ngIf="showAirlines">
+        <thead class="table-success text-center border-success">
+          <tr>
+            <th>Airline Number</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Seats</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngFor="let airline of availableAirlines">
+            <td>{{ airline.airlineId }}</td>
+            <td>{{ airline.from }}</td>
+            <td>{{ airline.to }}</td>
+            <td>{{ airline.businessSeats + airline.nonBusinessSeats }}</td>
+            <td>{{ airline.departure | date: "dd-MM-yyyy hh:mm:ss" }}</td>
+            <td>{{ airline.arrival | date: "dd-MM-yyyy hh:mm:ss" }}</td>
+            <td>{{ airline.ticketPrice }}</td>
+            <td>
+              <button
+                class="btn btn-outline-success"
+                (click)="book(airline.id)"
+              >
+                Book
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

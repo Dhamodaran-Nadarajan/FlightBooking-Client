@@ -13,6 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { AirlineManagementComponent } from './airline-management/airline-management.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ScheduleAirlineComponent } from './schedule-airline/schedule-airline.component';
+import { BookingComponent } from './booking/booking.component';
+import { PassengersComponent } from './passengers/passengers.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AirlineManagementComponent,
     LoginComponent,
     SignUpComponent,
+    ScheduleAirlineComponent,
+    BookingComponent,
+    PassengersComponent,
+    BookingHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +52,5 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 export class AppModule {}
 
 export function getToken() {
-  console.log('Token Getter..');
   return localStorage.getItem('jwt');
 }

@@ -16,5 +16,6 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
   }
 }

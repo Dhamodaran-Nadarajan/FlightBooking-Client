@@ -1,0 +1,214 @@
+<div class="container mt-4">
+  <div class="card">
+    <h3 class="card-header text-center bg-dark text-white">Book Flight</h3>
+  </div>
+  <div class="card-body m-lg-auto" style="width: 600px">
+    <form [formGroup]="bookingForm" (ngSubmit)="bookFlight()">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <label for="name" class="m-sm-1">Name</label>
+          <input
+            type="text"
+            class="form-control m-sm-1"
+            id="name"
+            formControlName="name"
+            readonly
+          />
+        </div>
+        <div class="col-lg-6">
+          <label for="email" class="m-sm-1">Email</label>
+          <input
+            type="text"
+            class="form-control m-sm-1"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <label class="m-sm-1">Meal Preference</label>
+          <select class="form-select m-sm-1" formControlName="mealPreferrence">
+            <option value="Veg">Vegetarian</option>
+            <option value="Non-Veg">Non-Vegetarian</option>
+          </select>
+        </div>
+        <div class="col-lg-6">
+          <label class="m-sm-1">No. of Passengers</label>
+          <input
+            type="number"
+            class="form-control m-sm-1"
+            formControlName="noOfPassengers"
+            value="{{ passengersCount }}"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="container container-md justify-content-center mt-2">
+        <table class="table table-bordered" formArrayName="passengers">
+          <thead class="table-success">
+            <tr class="text-center">
+              <th colspan="3">Passengers</th>
+              <th [width]="100">
+                <button
+                  type="button"
+                  (click)="addPassenger()"
+                  class="btn btn-outline-dark"
+                >
+                  Add
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr
+              *ngFor="let quantity of passengers().controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                Name:
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                />
+              </td>
+              <td>
+                Age:
+                <input
+                  type="number"
+                  formControlName="age"
+                  class="form-control"
+                />
+              </td>
+              <td>
+                Gender:
+                <select class="form-select" formControlName="gender">
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                  <option value="U">Unknown</option>
+                </select>
+              </td>
+              <td [width]="100">
+                <button
+                  (click)="removePassenger(i)"
+                  class="btn btn-outline-danger m-sm-3"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="h-100 d-flex align-items-center justify-content-center text-center mt-2"
+      >
+        <p class="alert alert-success" *ngIf="showSuccessMessage">
+          {{ message }}
+        </p>
+        <p class="alert alert-danger" *ngIf="showErrorMessage">
+          {{ message }}
+        </p>
+      </div>
+      <div class="form-group text-center mt-3">
+        <input type="submit" class="btn btn-outline-success" value="Submit" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <h3>Contacts</h3>
+<hr />
+<div class="card" [formGroup]="form">
+  <div class="card-header">
+    <label>User Contacts</label>
+  </div>
+  <div class="card-body">
+    <h5>User Info</h5>
+    <hr />
+    <div class="row">
+      <div class="col-md-2">Fist Name</div>
+      <div class="col-md-4">
+        <input formControlName="fName" type="text" class="form-control" />
+      </div>
+
+      <div class="col-md-2">Last Name</div>
+      <div class="col-md-4">
+        <input formControlName="lName" type="text" class="form-control" />
+      </div>
+    </div>
+    <h5>Address</h5>
+    <hr />
+
+    <ng-container formGroupName="addresses">
+      <div class="row">
+        <div class="col-md-2">Address 1</div>
+        <div class="col-md-4">
+          <input formControlName="address1" type="text" class="form-control" />
+        </div>
+
+        <div class="col-md-2">Address 2</div>
+        <div class="col-md-4">
+          <input formControlName="address2" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-2">State</div>
+        <div class="col-md-4">
+          <input formControlName="state" type="text" class="form-control" />
+        </div>
+
+        <div class="col-md-2">Country</div>
+        <div class="col-md-4">
+          <input formControlName="country" type="text" class="form-control" />
+        </div>
+      </div>
+    </ng-container>
+    <h5>Contacts</h5>
+    <button class="btn btn-outline-primary" (click)="addNewContacts()">
+      Add New Contacts
+    </button>
+    <hr />
+    <ng-container
+      formArrayName="contacts"
+      *ngFor="let o of contacts.controls; let i = index"
+    >
+      <b>Contact {{ i + 1 }}</b>
+      <button
+        class="btn btn-outline-danger mx-3 mt-3"
+        (click)="removeContact(i)"
+      >
+        &times;
+      </button>
+      <hr />
+
+      <div class="row mt-2" [formGroupName]="i">
+        <div class="col-md-2">Phone No</div>
+        <div class="col-md-4">
+          <input formControlName="phone" type="text" class="form-control" />
+        </div>
+
+        <div class="col-md-2">Email</div>
+        <div class="col-md-4">
+          <input formControlName="email" type="text" class="form-control" />
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="card-footer text-center">
+    <button (click)="onSave()" class="btn btn-primary">Save</button>
+  </div>
+</div>
+
+<div class="card mt-2">
+  <div class="card-header">Result</div>
+  <div class="card-body">
+    <code>
+      <pre>
+                {{ result | json }}
+            </pre
+      >
+    </code>
+  </div>
+</div> -->

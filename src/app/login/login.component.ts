@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           this.invalidLogin = false;
           const resp = <User>response;
           localStorage.setItem('jwt', resp.token);
+          localStorage.setItem('user', resp.username);
           if (resp.username === 'Admin_User') {
             this.router.navigate(['/airline']);
           } else {

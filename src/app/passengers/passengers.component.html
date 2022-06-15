@@ -1,0 +1,25 @@
+<form [formGroup]="childForm">
+  <div>
+    <label class="m-sm-auto"
+      ><strong>Passenger {{ 1 }}:</strong></label
+    >
+  </div>
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center">
+      <label class="m-sm-auto">Name</label>
+      <input type="text" class="form-control m-sm-1" formControlName="name" />
+    </div>
+    <div class="col-4 d-flex justify-content-center">
+      <label class="m-sm-auto">Age</label>
+      <input type="number" class="form-control m-sm-1" formControlName="age" />
+    </div>
+    <div class="col-4 d-flex justify-content-center">
+      <label class="m-sm-auto">Gender</label>
+      <select class="form-select m-sm-1" formControlName="gender">
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="U">Unknown</option>
+      </select>
+    </div>
+  </div>
+</form>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ILoginStatus } from '../_interfaces/loginStatus';
 
 @Component({
@@ -8,14 +9,19 @@ import { ILoginStatus } from '../_interfaces/loginStatus';
 })
 export class NavComponent implements OnInit {
   @Input() isUserLoggedIn: boolean = false;
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor(private router: Router) {
     if (localStorage.getItem('jwt')) this.isUserLoggedIn = true;
   }
+
+  ngOnInit(): void {}
 
   logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
+    this.router
+      .navigateByUrl('/navbar', { skipLocationChange: false })
+      .then(() => {
+        this.router.navigate(['login']);
+      });
   }
 }

@@ -11,22 +11,28 @@ import { BookingService } from '../_services/booking.service';
 export class BookingHistoryComponent implements OnInit {
   pnr: number;
   message: string = '';
+  admin_view: boolean = false;
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   showBookingDetails: boolean = false;
   showPassengersDetails: boolean = false;
+  showAllBookingData: boolean = false;
 
+  allbookingDetails: any;
   bookingdata: bookingDetails;
   airlineData: scheduleDetails;
   passengerData: any;
 
   constructor(private bookingService: BookingService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.admin_view = <string>localStorage.getItem('user') === 'Admin_User';
+  }
   cancel(pnr: any) {
     this.bookingService.cancelTicket(pnr).subscribe(
       (response) => {
         this.message = 'Ticket cancelled successfully..';
+        this.resetStatus();
         this.showSuccessMessage = true;
         this.showErrorMessage = false;
       },
@@ -53,11 +59,13 @@ export class BookingHistoryComponent implements OnInit {
             .subscribe(
               (resp) => {
                 this.airlineData = <scheduleDetails>resp;
+                this.showAllBookingData = false;
                 this.showBookingDetails = true;
                 this.getPassengersDetails(this.bookingdata.bookingId);
               },
               (err: HttpErrorResponse) => {
                 this.message = err.error.message;
+                this.showAllBookingData = false;
                 this.showErrorMessage = true;
                 this.showSuccessMessage = false;
                 this.showBookingDetails = false;
@@ -67,6 +75,7 @@ export class BookingHistoryComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.message = error.error.message;
+
         this.showErrorMessage = true;
         this.showBookingDetails = false;
       }
@@ -77,12 +86,45 @@ export class BookingHistoryComponent implements OnInit {
     this.bookingService.getPassengers(bookingId).subscribe(
       (response) => {
         this.passengerData = response;
+
         this.showPassengersDetails = true;
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
       }
     );
+  }
+
+  getAllBookings() {
+    if (this.admin_view) {
+      this.bookingService.getAllBookings().subscribe(
+        (response) => {
+          this.allbookingDetails = <bookingDetails>response;
+          this.showBookingDetails = false;
+          this.showPassengersDetails = false;
+          this.showAllBookingData = true;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err.error);
+          this.message = err.error;
+
+          this.showErrorMessage = true;
+        }
+      );
+    } else {
+      this.message = 'Only admin can do this action !!';
+      this.showErrorMessage = true;
+    }
+  }
+
+  resetStatus() {
+    this.message = '';
+    this.admin_view = false;
+    this.showSuccessMessage = false;
+    this.showErrorMessage = false;
+    this.showBookingDetails = false;
+    this.showPassengersDetails = false;
+    this.showAllBookingData = false;
   }
 }
 

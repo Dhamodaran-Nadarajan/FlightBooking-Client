@@ -5,6 +5,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
 import { BookingComponent } from './booking/booking.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component';
 import { ScheduleAirlineComponent } from './schedule-airline/schedule-airline.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -13,6 +14,7 @@ import { AuthGuard } from './_guards/auth.guard';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: 'navbar', component: NavComponent },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   {
     path: 'scheduleAirline',

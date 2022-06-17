@@ -41,7 +41,10 @@ export class AirlineManagementComponent implements OnInit {
         this.showErrorMessage = false;
       },
       (error: HttpErrorResponse) => {
-        this.message = error.message;
+        this.message =
+          error.status === 403
+            ? 'Only administrator can do this action !!!'
+            : error.message;
         this.showAirlines = false;
         this.showMessage = false;
         this.showAddAirline = false;
@@ -110,7 +113,10 @@ export class AirlineManagementComponent implements OnInit {
             this.showAddAirline = false;
           },
           (error: HttpErrorResponse) => {
-            this.message = error.message;
+            this.message =
+              error.status === 403
+                ? 'Only administrator can do this action !!!'
+                : error.message;
             this.showMessage = false;
             this.showErrorMessage = true;
             this.showAddAirline = false;

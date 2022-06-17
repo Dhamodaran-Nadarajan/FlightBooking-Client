@@ -37,4 +37,8 @@ export class BookingService {
   getPassengers(bookingId: any) {
     return this.http.get(this.baseUrl + `bookings/passengers/${bookingId}`);
   }
+
+  getAllBookings() {
+    return this.http.get(this.baseUrl + `bookings/`);
+  }
 }

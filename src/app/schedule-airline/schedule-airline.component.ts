@@ -48,7 +48,10 @@ export class ScheduleAirlineComponent implements OnInit {
             this.showErrorMessage = false;
           },
           (error: HttpErrorResponse) => {
-            this.message = error.message;
+            this.message =
+              error.status === 403
+                ? 'Only administrator can do this action !!!'
+                : error.message;
             this.showSuccessMessage = false;
             this.showErrorMessage = true;
           }

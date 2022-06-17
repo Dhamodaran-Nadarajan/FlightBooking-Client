@@ -39,7 +39,8 @@ export class SignUpComponent implements OnInit {
           },
           (err) => {
             this.signUpForm.reset();
-            this.message = err.error.message;
+            console.log(err);
+            this.message = err.error;
             this.registrationError = true;
             this.registrationSuccess = false;
           }
